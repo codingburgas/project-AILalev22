@@ -68,3 +68,11 @@ coverage/
 *.env
 .env.local
 .env.*.local
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3

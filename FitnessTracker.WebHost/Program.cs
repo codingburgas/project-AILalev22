@@ -1,3 +1,9 @@
+using FitnessTracker.Infrastructure.Data;
+using FitnessTracker.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using FitnessTracker.Infrastructure;
+
 namespace FitnessTracker
 {
     public class Program
@@ -5,9 +11,18 @@ namespace FitnessTracker
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddInfrastructure(builder.Configuration);
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.Run();
         }

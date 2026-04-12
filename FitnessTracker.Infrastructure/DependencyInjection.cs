@@ -1,14 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FitnessTracker.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FitnessTracker.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddServices(this IServiceCollection services) 
+        public static IServiceCollection AddInfrastructure(
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(
+                    configuration.GetConnectionString("DefaultConnection")));
+
             return services;
         }
     }
