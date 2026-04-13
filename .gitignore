@@ -21,10 +21,10 @@ appsettings.*.json   # If you have sensitive dev/staging keys
 appsettings.Development.json
 appsettings.Local.json
 
-# EF Core Migrations
-**/Migrations/*.Designer.cs
-**/Migrations/*.Snapshot.cs
-**/Migrations/*.resx
+# # EF Core Migrations
+# **/Migrations/*.Designer.cs
+# **/Migrations/*.Snapshot.cs
+# **/Migrations/*.resx
 
 # NuGet
 *.nupkg

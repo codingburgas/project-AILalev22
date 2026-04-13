@@ -3,6 +3,7 @@ using FitnessTracker.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FitnessTracker.Infrastructure;
+using FitnessTracker.Application;
 
 namespace FitnessTracker
 {
@@ -14,11 +15,23 @@ namespace FitnessTracker
 
             builder.Services.AddInfrastructure(builder.Configuration);
 
+            builder.Services.AddApplication();
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            builder.Services.AddAuthentication();
+
+            builder.Services.AddAuthorization();
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+            }
 
             app.UseAuthentication();
 
