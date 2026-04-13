@@ -4,10 +4,20 @@ namespace FitnessTracker.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task<string> GetUserIdAsync(string username);
+        // REGISTER
+        Task<bool> RegisterAsync(RegisterDto dto);
 
-        Task<bool> IsAdminAsync(string userId);
+        // LOGIN
+        Task<bool> LoginAsync(LoginDto dto);
+
+        // LOGOUT
+        Task LogoutAsync();
+
+        // USER INFO
+        Task<string?> GetUserIdAsync(string username);
 
         Task<ApplicationUserDto?> GetUserAsync(string userId);
+
+        Task<bool> IsAdminAsync(string userId);
     }
 }

@@ -1,10 +1,9 @@
 ﻿namespace FitnessTracker.Application.DTOs.Users
 {
-    public class ApplicationUserDto
+    public class RegisterDto
     {
-        public string Id { get; set; } = null!;
         public string UserName { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
+        public string Password { get; set; } = null!;
     }
 }
