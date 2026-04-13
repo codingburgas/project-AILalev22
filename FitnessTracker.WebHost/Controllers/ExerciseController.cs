@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessTracker.WebHost.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ExerciseController : Controller
     {
         private readonly IExerciseService _Exerciseervice;

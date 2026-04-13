@@ -25,6 +25,13 @@ namespace FitnessTracker
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+                options.LogoutPath = "/Auth/Logout";
+                options.AccessDeniedPath = "/Auth/AccessDenied";
+            });
+
             builder.Services.AddAuthentication();
 
             builder.Services.AddAuthorization();
@@ -40,9 +47,13 @@ namespace FitnessTracker
             }
             using (var scope = app.Services.CreateScope())
             {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var services = scope.ServiceProvider;
 
-                string[] roles = new[] { "User", "Admin" };
+                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                // 1. Create roles
+                string[] roles = { "Admin", "User" };
 
                 foreach (var role in roles)
                 {
@@ -50,6 +61,37 @@ namespace FitnessTracker
                     {
                         await roleManager.CreateAsync(new IdentityRole(role));
                     }
+                }
+
+                // 2. Get admin email safely
+                var adminEmail = app.Configuration["Other:adminEmail"];
+
+                if (string.IsNullOrWhiteSpace(adminEmail))
+                    return;
+
+                // 3. Try find admin
+                var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+                // 4. Create admin if not exists
+                if (adminUser == null)
+                {
+                    adminUser = new ApplicationUser
+                    {
+                        UserName = adminEmail,
+                        Email = adminEmail,
+                        EmailConfirmed = true
+                    };
+
+                    var createResult = await userManager.CreateAsync(adminUser, app.Configuration["Other:adminPassword"]!);
+
+                    if (!createResult.Succeeded)
+                        throw new Exception("Failed to create admin user");
+                }
+
+                // 5. Ensure Admin role is assigned
+                if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+                {
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
 

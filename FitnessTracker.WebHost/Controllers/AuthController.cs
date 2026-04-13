@@ -36,7 +36,7 @@ namespace FitnessTracker.WebHost.Controllers
                 return View(dto);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Statistics");
         }
 
         // GET: /Auth/Register
