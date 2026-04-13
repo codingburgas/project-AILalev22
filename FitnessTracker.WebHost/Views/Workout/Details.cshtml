@@ -1,0 +1,38 @@
+﻿@model WorkoutDetailsDto
+
+<h2>Workout Details</h2>
+
+<div class="mb-3">
+    <strong>Name:</strong> @Model.Name <br />
+    <strong>Date:</strong> @Model.Date.ToShortDateString()
+</div>
+
+<h4>Exercises</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Duration (min)</th>
+            <th>Intensity</th>
+            <th>Calories</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ex in Model.Exercises)
+        {
+            <tr>
+                <td>@ex.ExerciseName</td>
+                <td>@ex.Sets</td>
+                <td>@ex.Reps</td>
+                <td>@ex.DurationMinutes</td>
+                <td>@ex.Intensity</td>
+                <td>@ex.CaloriesBurned</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

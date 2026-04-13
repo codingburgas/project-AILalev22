@@ -1,0 +1,15 @@
+﻿@model WorkoutDetailsDto
+
+<h2>Delete Workout</h2>
+
+<h4>Are you sure you want to delete this workout?</h4>
+
+<div class="mb-3">
+    <strong>Name:</strong> @Model.Name <br />
+    <strong>Date:</strong> @Model.Date.ToShortDateString()
+</div>
+
+<form asp-action="Delete" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -18,11 +18,26 @@
             <!-- BRAND -->
             <a class="navbar-brand fw-bold m-0" href="/">FitnessTracker</a>
 
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+            <!-- LEFT MENU -->
+            <div class="d-flex gap-3 auth-actions">
+                <a class="text-white text-decoration-none" asp-controller="Workout" asp-action="Index">
+                    Workouts
+                </a>
+
+                <a class="text-white text-decoration-none" asp-controller="Exercise" asp-action="Index">
+                    Exercises
+                </a>
+            </div>
+                }
+
             <!-- RIGHT SIDE -->
             <div class="d-flex align-items-center ms-auto gap-2">
 
                 @if (User.Identity != null && User.Identity.IsAuthenticated)
                 {
+
                     <div class="auth-actions">
                         <span class="text-white lh-1 m-0">
                             Hello, @User.Identity.Name!
