@@ -24,6 +24,8 @@ namespace FitnessTracker.Infrastructure
 
             services.AddScoped<IExerciseService, ExerciseService>();
 
+            services.AddScoped<IStatisticsService, StatisticsService>();
+
             return services;
         }
     }

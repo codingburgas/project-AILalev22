@@ -1,0 +1,76 @@
+﻿@model List<FitnessTracker.Application.DTOs.Statistics.DailyActivityDto>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<!-- CARDS ROW -->
+<div class="row mb-4">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Days</h5>
+                <h3>@Model.Count</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Calories</h5>
+                <h3>
+                    @Model.Sum(x => x.Calories)
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Minutes</h5>
+                <h3>
+                    @Model.Sum(x => x.Minutes)
+                </h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHART -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="mb-3">Daily Activity</h5>
+        <canvas id="activityChart"></canvas>
+    </div>
+</div>
+
+<!-- CHART.JS -->
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Select(x => x.Date.ToString("MM-dd"))));
+        const calories = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Select(x => x.Calories)));
+
+        const ctx = document.getElementById('activityChart');
+
+        new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: labels,
+        datasets: [{
+        label: 'Calories Burned',
+        data: calories,
+        borderWidth: 2,
+        tension: 0.3
+        }]
+        }
+        });
+    </script>
+}

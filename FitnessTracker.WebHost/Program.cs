@@ -61,7 +61,7 @@ namespace FitnessTracker
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Statistics}/{action=Index}/{id?}");
 
             app.Run();
         }
