@@ -1,4 +1,6 @@
-﻿using FitnessTracker.Infrastructure.Data;
+﻿using FitnessTracker.Application.Interfaces;
+using FitnessTracker.Infrastructure.Data;
+using FitnessTracker.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +17,8 @@ namespace FitnessTracker.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(
                     configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

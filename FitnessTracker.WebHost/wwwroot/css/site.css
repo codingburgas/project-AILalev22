@@ -1,0 +1,14 @@
+﻿/* RIGHT SIDE AUTH BUTTONS */
+.auth-actions {
+    display: flex;
+    align-items: center; /* vertical center */
+    justify-content: center;
+    gap: 10px; /* space between buttons */
+}
+
+    /* OPTIONAL: make buttons feel less "cramped" */
+    .auth-actions .btn {
+        padding: 4px 12px;
+        line-height: 1.2;
+        border-radius: 6px;
+    }

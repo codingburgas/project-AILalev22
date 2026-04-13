@@ -1,11 +1,12 @@
 ﻿using FitnessTracker.Application.DTOs.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace FitnessTracker.Application.Interfaces
 {
     public interface IAuthService
     {
         // REGISTER
-        Task<bool> RegisterAsync(RegisterDto dto);
+        Task<IdentityResult> RegisterAsync(RegisterDto dto);
 
         // LOGIN
         Task<bool> LoginAsync(LoginDto dto);

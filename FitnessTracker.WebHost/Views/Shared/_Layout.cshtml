@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitnessTracker</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex align-items-center">
+
+            <!-- BRAND -->
+            <a class="navbar-brand fw-bold m-0" href="/">FitnessTracker</a>
+
+            <!-- RIGHT SIDE -->
+            <div class="d-flex align-items-center ms-auto gap-2">
+
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <div class="auth-actions">
+                        <span class="text-white lh-1 m-0">
+                            Hello, @User.Identity.Name!
+                        </span>
+
+                        <form asp-controller="Auth"
+                            asp-action="Logout"
+                            method="post"
+                            class="m-0 p-0">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-outline-light btn-sm lh-1">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="auth-actions">
+                        <a href="/auth/login"
+                           class="btn btn-outline-light btn-sm lh-1">
+                            Login
+                        </a>
+
+                        <a href="/auth/register"
+                           class="btn btn-light btn-sm text-dark fw-semibold lh-1">
+                            Register
+                        </a>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

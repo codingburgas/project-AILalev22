@@ -58,7 +58,7 @@ namespace FitnessTracker.Infrastructure.Services
             return result.Succeeded;
         }
 
-        public async Task<bool> RegisterAsync(RegisterDto dto)
+        public async Task<IdentityResult> RegisterAsync(RegisterDto dto)
         {
             var user = new ApplicationUser
             {
@@ -69,11 +69,11 @@ namespace FitnessTracker.Infrastructure.Services
             var result = await _userManager.CreateAsync(user, dto.Password);
 
             if (!result.Succeeded)
-                return false;
+                return result;
 
             await _userManager.AddToRoleAsync(user, "User");
 
-            return true;
+            return result;
         }
 
         public async Task LogoutAsync()
