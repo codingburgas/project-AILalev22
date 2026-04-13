@@ -2,6 +2,7 @@
 using FitnessTracker.Application.Interfaces;
 using FitnessTracker.Domain.Entities;
 using FitnessTracker.Infrastructure.Data;
+using FitnessTracker.WebHost.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,7 @@ namespace FitnessTracker.Infrastructure.Services
 
             return new WorkoutDetailsDto
             {
+                Id = workout.Id,
                 Name = workout.Name,
                 Date = workout.Date,
                 Exercises = workout.WorkoutExercises
@@ -104,6 +106,37 @@ namespace FitnessTracker.Infrastructure.Services
                 throw new Exception("Workout not found");
 
             _context.Workouts.Remove(workout);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddExerciseToWorkoutAsync(int workoutId, AddExerciseToWorkoutDto dto)
+        {
+            Console.WriteLine("ID {0}", workoutId);
+
+            var workout = await _context.Workouts
+                .Include(w => w.WorkoutExercises)
+                .FirstOrDefaultAsync(w => w.Id == workoutId);
+
+            if (workout == null)
+                throw new Exception("Workout not found");
+
+            var exercise = await _context.Exercises
+                .FirstOrDefaultAsync(e => e.Id == dto.ExerciseId);
+
+            if (exercise == null)
+                throw new Exception("Exercise not found");
+
+            var workoutExercise = new WorkoutExercise
+            {
+                WorkoutId = workoutId,
+                ExerciseId = dto.ExerciseId,
+                Sets = dto.Sets,
+                Reps = dto.Reps,
+                DurationMinutes = dto.DurationMinutes,
+                Intensity = Enum.Parse<IntensityLevel>(dto.Intensity)
+            };
+
+            _context.WorkoutExercises.Add(workoutExercise);
             await _context.SaveChangesAsync();
         }
     }

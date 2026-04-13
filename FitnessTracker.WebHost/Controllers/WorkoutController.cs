@@ -1,5 +1,6 @@
 ﻿using FitnessTracker.Application.DTOs.Workouts;
 using FitnessTracker.Application.Interfaces;
+using FitnessTracker.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -10,10 +11,11 @@ namespace FitnessTracker.WebHost.Controllers
     public class WorkoutController : Controller
     {
         private readonly IWorkoutService _workoutService;
-
-        public WorkoutController(IWorkoutService workoutService)
+        private readonly IExerciseService _exerciseService;
+        public WorkoutController(IWorkoutService workoutService, IExerciseService exerciseService)
         {
             _workoutService = workoutService;
+            _exerciseService = exerciseService;
         }
 
         private string GetUserId()
@@ -94,6 +96,25 @@ namespace FitnessTracker.WebHost.Controllers
             await _workoutService.DeleteWorkoutAsync(id);
 
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> AddExercise(int id)
+        {
+            ViewBag.WorkoutId = id;
+            ViewBag.Exercises = await _exerciseService.GetAllAsync();
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddExercise(int id, AddExerciseToWorkoutDto dto)
+        {
+
+            Console.WriteLine("Controller ID {0}", id);
+
+            await _workoutService.AddExerciseToWorkoutAsync(id, dto);
+
+            return RedirectToAction("Details", new { id });
         }
     }
 }

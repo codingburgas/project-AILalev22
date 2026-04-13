@@ -12,5 +12,7 @@ namespace FitnessTracker.Application.Interfaces
         Task CreateWorkoutAsync(CreateWorkoutDto dto, string userId);
         Task UpdateWorkoutAsync(int id, EditWorkoutDto dto);
         Task DeleteWorkoutAsync(int id);
+
+        Task AddExerciseToWorkoutAsync(int workoutId, AddExerciseToWorkoutDto dto);
     }
 }

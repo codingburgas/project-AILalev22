@@ -19,7 +19,10 @@ namespace FitnessTracker.Infrastructure
                     configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IAuthService, AuthService>();
+
             services.AddScoped<IWorkoutService, WorkoutService>();
+
+            services.AddScoped<IExerciseService, ExerciseService>();
 
             return services;
         }
