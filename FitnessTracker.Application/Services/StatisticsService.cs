@@ -3,7 +3,7 @@ using FitnessTracker.Application.Interfaces;
 using FitnessTracker.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitnessTracker.Infrastructure.Services
+namespace FitnessTracker.Application.Services
 {
     public class StatisticsService : IStatisticsService
     {

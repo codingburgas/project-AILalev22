@@ -1,6 +1,5 @@
 ﻿using FitnessTracker.Application.DTOs.Workouts;
 using FitnessTracker.Application.Interfaces;
-using FitnessTracker.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;

@@ -3,6 +3,7 @@ using FitnessTracker.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FitnessTracker.Infrastructure;
+using FitnessTracker.Application;
 
 namespace FitnessTracker
 {
@@ -13,6 +14,8 @@ namespace FitnessTracker
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddInfrastructure(builder.Configuration);
+
+            builder.Services.AddApplication();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FitnessTracker.Infrastructure.Services
+namespace FitnessTracker.Application.Services
 {
     public class WorkoutService : IWorkoutService
     {

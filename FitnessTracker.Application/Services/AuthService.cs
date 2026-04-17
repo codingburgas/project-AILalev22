@@ -3,7 +3,7 @@ using FitnessTracker.Application.Interfaces;
 using FitnessTracker.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace FitnessTracker.Infrastructure.Services
+namespace FitnessTracker.Application.Services
 {
     public class AuthService : IAuthService
     {
