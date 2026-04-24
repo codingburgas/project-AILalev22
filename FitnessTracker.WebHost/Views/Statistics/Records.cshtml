@@ -1,0 +1,36 @@
+﻿@model List<FitnessTracker.Application.DTOs.Statistics.ExerciseRecordDto>
+
+@{
+    ViewData["Title"] = "Personal Records";
+}
+
+<h2 class="mb-4">Personal Records</h2>
+
+<a asp-action="Index" class="btn btn-secondary mb-3">← Back to Dashboard</a>
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Best Reps</th>
+                    <th>Best Sets</th>
+                    <th>Max Duration (min)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.ExerciseName</td>
+                        <td>@r.BestReps</td>
+                        <td>@r.BestSets</td>
+                        <td>@r.MaxDuration</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

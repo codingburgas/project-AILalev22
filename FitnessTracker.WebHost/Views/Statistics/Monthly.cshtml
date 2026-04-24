@@ -1,0 +1,40 @@
+﻿@model FitnessTracker.Application.DTOs.Statistics.MonthlyStatsDto
+
+@{
+    ViewData["Title"] = "Monthly Stats";
+}
+
+<h2 class="mb-4">Monthly Statistics</h2>
+
+<a asp-action="Index" class="btn btn-secondary mb-3">← Back to Dashboard</a>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Calories</h5>
+                <h3>@Model.TotalCalories</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Workouts</h5>
+                <h3>@Model.TotalWorkouts</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Minutes</h5>
+                <h3>@Model.TotalMinutes</h3>
+            </div>
+        </div>
+    </div>
+
+</div>

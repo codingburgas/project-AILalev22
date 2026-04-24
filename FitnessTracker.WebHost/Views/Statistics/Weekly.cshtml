@@ -1,0 +1,40 @@
+﻿@model FitnessTracker.Application.DTOs.Statistics.WeeklyStatsDto
+
+@{
+    ViewData["Title"] = "Weekly Stats";
+}
+
+<h2 class="mb-4">Weekly Statistics</h2>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Calories</h5>
+                <h3>@Model.TotalCalories</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Workouts</h5>
+                <h3>@Model.TotalWorkouts</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Total Minutes</h5>
+                <h3>@Model.TotalMinutes</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">← Back</a>

@@ -5,6 +5,19 @@
 }
 
 <h2 class="mb-4">Dashboard</h2>
+<div class="mb-4 d-flex gap-2">
+    <a asp-controller="Statistics" asp-action="Weekly" class="btn btn-outline-primary">
+        Weekly Stats
+    </a>
+
+    <a asp-controller="Statistics" asp-action="Monthly" class="btn btn-outline-success">
+        Monthly Stats
+    </a>
+
+    <a asp-controller="Statistics" asp-action="Records" class="btn btn-outline-warning">
+        Personal Records
+    </a>
+</div>
 
 <!-- CARDS ROW -->
 <div class="row mb-4">
