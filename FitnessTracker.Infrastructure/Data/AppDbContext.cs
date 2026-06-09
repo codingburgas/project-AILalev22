@@ -12,9 +12,9 @@ namespace FitnessTracker.Infrastructure.Data
         {
         }
 
-        public DbSet<Workout> Workouts { get; set; }
-        public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+        public virtual DbSet<Workout> Workouts { get; set; }
+        public virtual DbSet<Exercise> Exercises { get; set; }
+        public virtual DbSet<WorkoutExercise> WorkoutExercises { get; set; }
     
 
     protected override void OnModelCreating(ModelBuilder builder)
